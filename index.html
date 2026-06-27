@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onlayn Kutubxona</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sarlavha -->
+    <header class="site-header">
+        <div class="container-fluid px-3 px-md-4">
+            <div class="header-inner">
+                <!-- Logo + burger -->
+                <div class="header-left">
+                    <button class="burger-btn" id="burgerBtn" aria-label="Menyu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <a class="header-brand" href="#">
+                        <i class="bi bi-book-half"></i> <span class="brand-text">Kutubxona</span>
+                    </a>
+                </div>
+
+                <!-- Nav (katta ekran) -->
+                <nav class="header-nav">
+                    <a href="#" class="header-nav-link active">Bosh sahifa</a>
+                    <a href="#" class="header-nav-link">Yangiliklar</a>
+                    <a href="#" class="header-nav-link">Eng yaxshilar</a>
+                    <a href="#" class="header-nav-link" id="favorites-link">Mening kitoblarim</a>
+                </nav>
+
+                <!-- Qidiruv -->
+                <div class="header-search">
+                    <div class="search-box">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Kitob qidirish..." id="searchInput">
+                        <button class="search-btn" id="searchButton">Qidirish</button>
+                    </div>
+                </div>
+
+                <!-- Mobil qidiruv tugmasi -->
+                <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Qidirish">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobil qidiruv satri (yashirin) -->
+            <div class="mobile-search-bar" id="mobileSearchBar">
+                <div class="search-box w-100">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Kitob qidirish..." id="searchInputMobile">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobil yon panel overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Asosiy kontent -->
+    <div class="container-fluid px-0">
+        <div class="row g-0">
+
+            <!-- Yon panel -->
+            <div class="col-auto sidebar-col" id="sidebarCol">
+                <aside class="sidebar" id="sidebar">
+                    <!-- Mobil yopish tugmasi -->
+                    <div class="sidebar-close-row">
+                        <button class="sidebar-close-btn" id="sidebarCloseBtn">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Kategoriyalar</div>
+                        <a href="#" class="sidebar-link active category-link" data-category="all">
+                            <i class="bi bi-house-door"></i> Hammasi
+                        </a>
+                        <a href="#" class="sidebar-link category-link" data-category="popular">
+                            <i class="bi bi-star"></i> Mashhurlar
+                        </a>
+                        <a href="#" class="sidebar-link category-link" data-category="new">
+                            <i class="bi bi-clock-history"></i> Yangi kitoblar
+                        </a>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Janrlar</div>
+                        <a href="#" class="sidebar-link genre-link" data-genre="badiiy">Badiiy adabiyot</a>
+                        <a href="#" class="sidebar-link genre-link" data-genre="ilmiy">Ilmiy</a>
+                        <a href="#" class="sidebar-link genre-link" data-genre="tarixiy">Tarixiy</a>
+                        <a href="#" class="sidebar-link genre-link" data-genre="fantastika">Fantastika</a>
+                        <a href="#" class="sidebar-link genre-link" data-genre="detektiv">Detektiv</a>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Kitoblar bo'limi -->
+            <div class="col main-col">
+                <div class="main-content">
+
+                    <!-- Sarlavha va filtr -->
+                    <div class="content-header">
+                        <div>
+                            <h2 class="content-title">Kitoblar</h2>
+                            <p class="content-subtitle" id="books-count">Barcha kitoblar</p>
+                        </div>
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">Hammasi</button>
+                            <button class="filter-btn" data-filter="popular">Mashhurlar</button>
+                            <button class="filter-btn" data-filter="new">Yangilar</button>
+                        </div>
+                    </div>
+
+                    <!-- Kitoblar tarmog'i -->
+                    <div class="books-grid" id="books-container">
+                        <!-- JS orqali yuklash: scripte.js -->
+                    </div>
+
+                    <!-- Paginatsiya -->
+                    <div class="pagination-wrap" id="pagination-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pastki qism -->
+    <footer class="site-footer">
+        <div class="container-fluid px-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6 class="footer-title"><i class="bi bi-book-half"></i> Onlayn Kutubxona</h6>
+                    <p class="footer-text">Har qanday joyda, har qanday vaqtda kitob o'qing</p>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="footer-title">Bog'lanish</h6>
+                    <p class="footer-text">
+                        <i class="bi bi-envelope me-2"></i>info@kutubxona.uz<br>
+                        <i class="bi bi-telephone me-2"></i>+998 99 123 45 67
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="footer-title">Ijtimoiy tarmoqlar</h6>
+                    <div class="footer-social">
+                        <a href="#"><i class="bi bi-telegram"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Onlayn Kutubxona. Barcha huquqlar himoyalangan.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: kitob ma'lumotlari -->
+    <div class="modal fade" id="bookReaderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title" id="bookReaderModalLabel">Kitob ma'lumotlari</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="bookReaderContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: o'qish oynasi -->
+    <div class="modal fade" id="bookReadingWindow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content reading-modal">
+                <div class="reading-header">
+                    <span id="reading-book-title">Kitob nomi</span>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="reading-body">
+                    <div class="reading-paper">
+                        <h3 class="text-center mb-2" id="reading-book-chapter">1-BOB</h3>
+                        <p class="text-muted text-center mb-4" id="reading-book-author">Muallif</p>
+                        <hr class="mb-4">
+                        <div id="reading-book-text" class="reading-text"></div>
+                    </div>
+                </div>
+                <div class="reading-footer">
+                    <button class="btn btn-outline-light btn-sm" onclick="showNotification('Bu birinchi sahifa', 'info')">
+                        <i class="bi bi-arrow-left"></i> Oldingi
+                    </button>
+                    <span class="text-white-50 small">Sahifa 1 / 10</span>
+                    <button class="btn btn-primary btn-sm" onclick="showNotification('Keyingi sahifalar tez orada qo\'shiladi', 'success')">
+                        Keyingi <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: muqova yuklash -->
+    <div class="modal fade" id="coverUploadModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title">Muqova yuklash</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-3" id="cover-modal-book-name"></p>
+
+                    <!-- Upload zona -->
+                    <div class="cover-upload-zone" id="coverDropZone">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                        <p>Rasmni bu yerga tashlang yoki bosing</p>
+                        <span>JPG, PNG, WEBP — max 5MB</span>
+                        <input type="file" id="coverFileInput" accept="image/*" style="display:none">
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="cover-preview-wrap" id="coverPreviewWrap" style="display:none;">
+                        <img id="coverPreviewImg" src="" alt="preview">
+                        <button class="cover-remove-btn" id="coverRemoveBtn">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Bekor qilish</button>
+                    <button class="btn btn-primary btn-sm" id="coverSaveBtn">
+                        <i class="bi bi-check2 me-1"></i> Saqlash
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- @Mikkie_mi tomonidan yozilgan -->
+    <script src="scripte.js"></script>
+</body>
+</html>
